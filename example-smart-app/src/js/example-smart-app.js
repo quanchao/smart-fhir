@@ -11,7 +11,7 @@
       if (smart.hasOwnProperty('patient')) {
         var patient = smart.patient;
         var pt = patient.read();
-        var obv = smart.patient.api.search({
+        var obv = smart.patient.api.fetchall({
                     type: 'Observation',
                     count:2,
                     query: {
@@ -29,9 +29,9 @@
         $.when(pt, obv).done(function(patient, obv) {
           var byCodes = smart.byCodes(obv, 'code');
           var gender = patient.gender;
-//           console.log(byCodes('8302-2'))
-//           console.log(byCodes('29463-7'))
-//           console.log(byCodes('2085-9'))
+          console.log(byCodes('8302-2'))
+          console.log(byCodes('29463-7'))
+          console.log(byCodes('2085-9'))
           var fname = '';
           var lname = '';
 
