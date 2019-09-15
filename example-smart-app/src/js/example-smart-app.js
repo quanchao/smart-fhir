@@ -11,9 +11,10 @@
       if (smart.hasOwnProperty('patient')) {
         var patient = smart.patient;
         var pt = patient.read();
-        var obv = smart.patient.api.fetchAll({
+        var obv = smart.patient.api.search({
                     type: 'Observation',
                     query: {
+                      count: 2,
                       code: {
                         $or: ['http://loinc.org|8302-2', 'http://loinc.org|8462-4',
                               'http://loinc.org|8480-6', 'http://loinc.org|2085-9',
@@ -22,13 +23,13 @@
                       }
                     }
                   });
-        console.log(obv);
+        
         $.when(pt, obv).fail(onError);
 
         $.when(pt, obv).done(function(patient, obv) {
           var byCodes = smart.byCodes(obv, 'code');
           var gender = patient.gender;
-
+          console.log(obv);
           var fname = '';
           var lname = '';
 
